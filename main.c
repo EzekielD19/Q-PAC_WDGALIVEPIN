@@ -171,7 +171,13 @@ void SystemClock_Config(void)
 {
     // Placeholder — replace with actual CubeMX-generated clock config
 }
-
+void soft_wdt_init(void)
+{   
+    HAL_Init();
+    MX_GPIO_Init_1();
+    MX_TIM2_Init();
+    HAL_TIM_Base_Start_IT(&htim2);
+}
 
 int main(void)
 {
@@ -181,12 +187,10 @@ int main(void)
     //* Interrupt handlers that must be implemented every executable ------------------------------*//
 
     msp_init();
+    soft_wdt_init();
 
     //////////////////////////////////////////////////////////////////////
-    HAL_Init();
-    SystemClock_Config();
-    MX_GPIO_Init_1();
-    MX_TIM2_Init();
+    
    
 
     
